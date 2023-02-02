@@ -126,7 +126,6 @@ class Schedule(object):
     run_date = None  # h_run_dt
 
     def __init__(self, data):
-
         self.train_type = _get_utf8(data, "h_trn_clsf_cd")
         self.train_name = _get_utf8(data, "h_trn_clsf_nm")
         self.train_group = _get_utf8(data, "h_trn_gp_cd")
