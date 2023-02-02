@@ -230,7 +230,6 @@ if st.session_state.trains is not None:
     col2.checkbox("Notify", key="notify")
 
     if st.button("Submit"):
-
         if email_receivers == "" and st.session_state.notify:
             st.error("Please set receiver(s) email in the sidebar")
         elif new_df.empty:

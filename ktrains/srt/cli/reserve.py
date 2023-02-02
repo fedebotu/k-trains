@@ -124,7 +124,6 @@ def select_date():
 
 
 def search_train(client, dep, arr, date):
-
     trains = client.search_train(dep, arr, date, "000000")
     trains = [
         {
