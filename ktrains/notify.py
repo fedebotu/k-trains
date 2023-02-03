@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from getpass import *
 
 
-def email_notify(sender, receivers, mail_subject, mail_content, sender_pass=None):
+def email_notify(sender, receivers, mail_subject, mail_content, sender_pass=None, html=True):
     # The mail addresses and password
     sender_address = sender
     sender_pass = sender_pass if sender_pass else getpass()
@@ -18,7 +18,8 @@ def email_notify(sender, receivers, mail_subject, mail_content, sender_pass=None
     message["Subject"] = mail_subject  # The subject line
 
     # The body and the attachments for the mail
-    message.attach(MIMEText(mail_content, "plain"))
+    mode = "html" if html else "plain"
+    message.attach(MIMEText(mail_content, mode))
 
     # Create SMTP session for sending the mail
     session = smtplib.SMTP("smtp.gmail.com", 587)  # use gmail with port

@@ -1,4 +1,4 @@
 Train
-[KTX] 2월 2일, 서울~대전(22:30~23:32) 특실,일반실 23,700원 5%적립
-has seats now!
-Current time: 2023-02-02 22:01:57
+[SRT] 02월 06일, 수서~대전(16:21~17:15) 특실 예약가능, 일반실 예약가능
+has been reserved! Complete the payment process on the app or website.
+Current time: 2023-02-03 13:42:10

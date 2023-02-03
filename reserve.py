@@ -10,14 +10,36 @@ from ktrains.srt.srt import SRT
 from ktrains.utils import save_to_log
 
 
+TEMPLATE_FILE = "assets/email-template.html"
+KORAIL_RESERVE_LINK = "https://www.letskorail.com/ebizprd/EbizPrdTicketpr13500W_pr13510.do"
+SRT_RESERVE_LINK = "https://etk.srail.kr/hpg/hra/02/selectReservationList.do?pageId=TK0102010000"
+
+
+def create_email(subject, message, reserve=False, mode="korail"):
+    with open(TEMPLATE_FILE, 'r') as f:
+        html = f.read()
+    html = html.replace("{{subject}}", subject)
+    html = html.replace("{{message}}", message)
+    if reserve:
+        if mode == "korail":
+            link = KORAIL_RESERVE_LINK
+        else:
+            link = SRT_RESERVE_LINK
+        html = html.replace("{{link}}",  f'<td> <a href="{link}" target="_blank">Complete reservation here!</a> </td>')
+    else:
+        html = html.replace("{{link}}", "")
+    return html
+
+
 def manage_available(train, email_sender, email_receivers, email_password, notify=True):
     subject = "Available!"
     print(subject)
     message = f"Train\n{train}\nhas seats now!"
     message += f"\nCurrent time: {python_time.strftime('%Y-%m-%d %H:%M:%S', python_time.localtime())}"
     if notify:
+        html = create_email(subject, message, reserve=False)
         email_notify(
-            email_sender, email_receivers, subject, message, sender_pass=email_password
+            email_sender, email_receivers, subject, html, sender_pass=email_password
         )
     save_to_log(message)
     chime.info()
@@ -31,24 +53,27 @@ def manage_unavailable(
     message = f"Train\n{train}\nhas no more seats now."
     message += f"\nCurrent time: {python_time.strftime('%Y-%m-%d %H:%M:%S', python_time.localtime())}"
     if notify:
+        html = create_email(subject, message, reserve=False)
         email_notify(
-            email_sender, email_receivers, subject, message, sender_pass=email_password
+            email_sender, email_receivers, subject, html, sender_pass=email_password
         )
     save_to_log(message)
     chime.warning()
 
 
 def manage_reservation(
-    train, email_sender, email_receivers, email_password, notify=True
+    train, email_sender, email_receivers, email_password, notify=True, mode="korail"
 ):
     subject = "Reserved!"
     print(subject)
     message = f"Train\n{train}\nhas been reserved! Complete the payment process on the app or website."
     message += f"\nCurrent time: {python_time.strftime('%Y-%m-%d %H:%M:%S', python_time.localtime())}"
+
     if notify:
         print("Sending reservation message")
+        html = create_email(subject, message, reserve=True, mode=mode)
         email_notify(
-            email_sender, email_receivers, subject, message, sender_pass=email_password
+            email_sender, email_receivers, subject, html, sender_pass=email_password
         )
     save_to_log(message)
     chime.success()
@@ -108,7 +133,7 @@ def get_trains(
                     if reserve:
                         ktrains.reserve(train)
                         manage_reservation(
-                            train, email_sender, email_receivers, email_password, notify
+                            train, email_sender, email_receivers, email_password, notify, mode
                         )
                         print("Reserved. Exiting...")
                         return
