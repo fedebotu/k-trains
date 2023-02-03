@@ -9,7 +9,7 @@ from st_aggrid import AgGrid, GridOptionsBuilder
 
 from ktrains.korail.korail import Korail
 from ktrains.srt.srt import SRT
-from ktrains.utils import Stations, save_to_log
+from ktrains.utils import Stations, save_to_log, LINKS
 
 # Dictionary of functions
 name_to_class = {
@@ -52,25 +52,31 @@ def check_login():
 st.title("K-trains 🇰🇷-🚄")
 
 
-st.sidebar.title("Settings")
+# st.sidebar.title("Settings")
 
 # Sidebar
-language = st.sidebar.selectbox("Select language", ["en", "kor"])
+# language = st.sidebar.selectbox("Select language", ["en", "kor"])
 
-st.sidebar.subheader("Email settings")
-st.sidebar.write(
-    "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
-)
-email_receivers = st.sidebar.text_input("Receivers", st.session_state.email_receivers)
-st.session_state.email_receivers = email_receivers
+# st.sidebar.subheader("Email settings")
+# st.sidebar.write(
+#     "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
+# )
+# email_receivers = st.sidebar.text_input("Receivers", st.session_state.email_receivers)
+# st.session_state.email_receivers = email_receivers
 
 if not check_login():
     # Login page
     # Checkbox with two options and an image on top of each
-    mode = st.selectbox("Select railways company", ["Korail", "SRT"])
+    mode = st.selectbox("Select railways company", ["Korail", "SRT"]).lower()
     st.session_state.mode = mode.lower()
-    st.session_state.id = st.text_input("ID", st.session_state.id)
-    st.session_state.pw = st.text_input("PW", st.session_state.pw, type="password")
+    st.write(
+        "Get your credentials from {} website: [{}]({})".format(
+            LINKS[mode]["name"], LINKS[mode]["link"], LINKS[mode]["link"]
+        )
+    )
+    col1, col2 = st.columns(2)
+    st.session_state.id = col1.text_input("ID", st.session_state.id)
+    st.session_state.pw = col2.text_input("PW", st.session_state.pw, type="password")
     login_button = st.button("Login")
     if login_button:
         KTrains = name_to_class[st.session_state.mode]
@@ -82,6 +88,8 @@ if not check_login():
         else:
             st.error("Login failed")
 else:
+    language = st.selectbox("Select language", ["en", "kor"])
+
     # What happens when logged in
     mode = st.session_state.mode
 
@@ -224,10 +232,45 @@ if st.session_state.trains is not None:
         train_codes = new_df["No"].tolist()
         # st.write(train_codes)
 
-    st.write("Reserve and/or notify when available?")
+    st.header("Runner Settings")
+    st.write(
+        "The app will automatically reserve and/or notify you when the train is available."
+    )
+
     col1, col2 = st.columns(2)
-    col1.checkbox("Reserve", key="reserve")
-    col2.checkbox("Notify", key="notify")
+    with col1:
+        st.subheader("Reserve settings")
+        st.write(
+            f"Reserve the train(s) automatically. You will need to reserve in the app/website within few minutes here: {LINKS[mode]['reserve_link']}"
+        )
+        st.write(
+            "If you do not process the payment, the reservation will be cancelled automatically."
+        )
+        st.number_input(
+            "Number of tickets",
+            min_value=1,
+            max_value=10,
+            value=1,
+            step=1,
+            key="num_tickets",
+        )
+    with col2:
+        st.subheader("Email notifications settings")
+        st.write("Notify you when the train is available.")
+        st.write(
+            "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
+        )
+        st.write(
+            "Note: sender email is k-trains@gmail.com. Be sure to check your spam folder."
+        )
+        email_receivers = st.text_input("Receivers", st.session_state.email_receivers)
+        st.session_state.email_receivers = email_receivers
+
+    col1, col2 = st.columns(2)
+    col1.checkbox("Reserve", key="reserve", value=True)
+    col2.checkbox("Notify", key="notify", value=True)
+
+    st.markdown("---")
 
     if st.button("Submit"):
 
@@ -264,6 +307,8 @@ if st.session_state.trains is not None:
                 str(st.session_state.notify),
                 "--reserve",
                 str(st.session_state.reserve),
+                "--number-of-tickets",
+                str(st.session_state.num_tickets),
             ]
             print(" ".join(command))
             pid = subprocess.Popen(command)  # open in background
