@@ -1,34 +1,14 @@
 import argparse
 import time as python_time
-
+from typing import List
+import traceback
 import chime
 import streamlit as st
 
 from ktrains.korail.korail import Korail
-from ktrains.notify import email_notify
+from ktrains.notify import email_notify, create_email
 from ktrains.srt.srt import SRT
 from ktrains.utils import save_to_log
-
-
-TEMPLATE_FILE = "assets/email-template.html"
-KORAIL_RESERVE_LINK = "https://www.letskorail.com/ebizprd/EbizPrdTicketpr13500W_pr13510.do"
-SRT_RESERVE_LINK = "https://etk.srail.kr/hpg/hra/02/selectReservationList.do?pageId=TK0102010000"
-
-
-def create_email(subject, message, reserve=False, mode="korail"):
-    with open(TEMPLATE_FILE, 'r') as f:
-        html = f.read()
-    html = html.replace("{{subject}}", subject)
-    html = html.replace("{{message}}", message)
-    if reserve:
-        if mode == "korail":
-            link = KORAIL_RESERVE_LINK
-        else:
-            link = SRT_RESERVE_LINK
-        html = html.replace("{{link}}",  f'<td> <a href="{link}" target="_blank">Complete reservation here!</a> </td>')
-    else:
-        html = html.replace("{{link}}", "")
-    return html
 
 
 def manage_available(train, email_sender, email_receivers, email_password, notify=True):
@@ -80,21 +60,44 @@ def manage_reservation(
 
 
 def get_trains(
-    id,
-    pw,
-    email_receivers,
-    dep,
-    arr,
-    date,
-    time,
-    train_nos,
-    mode="korail",
-    notify=True,
-    reserve=False,
-    timeout=5,
-    email_sender=None,
-    email_password=None,
+    id: str,
+    pw: str,
+    email_receivers: List[str],
+    dep: str,
+    arr: str,
+    date: str,
+    time: str,
+    train_nos: List[str],
+    mode: str = "korail",
+    notify: bool = True,
+    reserve: bool = True,
+    number_of_tickets: int = 1,
+    number_of_tries: int = 10,
+    timeout: int = 5,
+    email_sender: str = None,
+    email_password: str = None,
 ):
+    """
+    Main function to run the script. This function will run forever until the number of tickets is reserved or the number of tries is reached.
+
+    Args:
+        id (str): Korail or SRT ID
+        pw (str): Korail or SRT password
+        email_receivers (str): comma separated list of email receivers
+        dep (str): departure station
+        arr (str): arrival station
+        date (str): date of travel in YYYYMMDD format
+        time (str): time of travel in HHMM format
+        train_nos (str): comma separated list of train numbers
+        mode (str, optional): korail or srt. Defaults to "korail".
+        notify (bool, optional): whether to send email notifications. Defaults to True.
+        reserve (bool, optional): whether to reserve tickets. Defaults to False.
+        number_of_tickets (int, optional): number of tickets to reserve. Defaults to 1.
+        number_of_tries (int, optional): number of tries to search for trains. Defaults to 10.
+        timeout (int, optional): timeout between each search. Defaults to 5.
+        email_sender (str, optional): email sender. Defaults to None.
+        email_password (str, optional): email password. Defaults to None.
+    """
     try:
         print("Running main script!")
 
@@ -121,6 +124,9 @@ def get_trains(
 
         train_availability = {train_no: False for train_no in train_nos}
 
+        tickets_reserved = 0
+        total_tries = 0
+
         while True:
             trains = ktrains.search_train(dep, arr, date, time, available_only=False)
 
@@ -133,10 +139,18 @@ def get_trains(
                     if reserve:
                         ktrains.reserve(train)
                         manage_reservation(
-                            train, email_sender, email_receivers, email_password, notify, mode
+                            train,
+                            email_sender,
+                            email_receivers,
+                            email_password,
+                            notify,
+                            mode,
                         )
-                        print("Reserved. Exiting...")
-                        return
+                        print("Reserved 1 ticket!")
+                        tickets_reserved += 1
+                        if tickets_reserved >= number_of_tickets:
+                            print("Reserved all tickets. Exiting...")
+                            return
                     else:
                         manage_available(
                             train, email_sender, email_receivers, email_password, notify
@@ -148,13 +162,18 @@ def get_trains(
                         train, email_sender, email_receivers, email_password, notify
                     )
                     train_availability[train.train_number] = False
+                    total_tries += 1
+                    if total_tries >= number_of_tries:
+                        print(f"Max tries reached: {number_of_tries}. Exiting...")
+                        return
                 else:
                     pass  # do nothing
 
             # sleep for timeout seconds
             python_time.sleep(timeout)
 
-    except Exception as e:
+    except Exception:
+        e = traceback.format_exc()
         print("Error:\n" + str(e))
         save_to_log("Error:\n" + str(e))
         chime.error()
@@ -173,6 +192,8 @@ if __name__ == "__main__":
     parser.add_argument("--mode", type=str, default="korail")
     parser.add_argument("--notify", type=str, default="True")
     parser.add_argument("--reserve", type=str, default="False")
+    parser.add_argument("--number-of-tickets", type=int, default=1)
+    parser.add_argument("--number-of-tries", type=int, default=10)
     parser.add_argument("--timeout", type=int, default=5)
     parser.add_argument("--email-sender", type=str, default=None)
     parser.add_argument("--email-password", type=str, default=None)
