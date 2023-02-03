@@ -4,6 +4,22 @@ from ktrains.srt.utils import convert_station_name as srt_convert_station_name
 from ktrains.srt.utils import station_names as srt_station_names
 
 
+LINKS = {
+    "korail": {
+        "name": "Korail",
+        "link": "https://www.letskorail.com",
+        "login_link": "https://www.letskorail.com/korail/com/login.do",
+        "reserve_link": "https://www.letskorail.com/ebizprd/EbizPrdTicketpr13500W_pr13510.do",
+    },
+    "srt": {
+        "name": "SRT",
+        "link": "https://etk.srail.kr",
+        "login_link": "https://etk.srail.kr/cmc/01/selectLoginForm.do?pageId=TK0701000000",
+        "reserve_link": "https://etk.srail.kr/hpg/hra/02/selectReservationList.do?pageId=TK0102010000",
+    },
+}
+
+
 def save_to_log(message, fname="log.txt"):
     with open(fname, "w") as f:
         f.write(message)
