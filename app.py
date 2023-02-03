@@ -6,6 +6,7 @@ from copy import deepcopy
 import pandas as pd
 import streamlit as st
 from st_aggrid import AgGrid, GridOptionsBuilder
+import streamlit.components.v1 as components
 
 from ktrains.korail.korail import Korail
 from ktrains.srt.srt import SRT
@@ -51,18 +52,7 @@ def check_login():
 
 st.title("K-trains 🇰🇷-🚄")
 
-
-# st.sidebar.title("Settings")
-
-# Sidebar
-# language = st.sidebar.selectbox("Select language", ["en", "kor"])
-
-# st.sidebar.subheader("Email settings")
-# st.sidebar.write(
-#     "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
-# )
-# email_receivers = st.sidebar.text_input("Receivers", st.session_state.email_receivers)
-# st.session_state.email_receivers = email_receivers
+st.write("Fork me on [GitHub](https://github.com/fedebotu/k-trains)")
 
 if not check_login():
     # Login page
@@ -241,7 +231,7 @@ if st.session_state.trains is not None:
     with col1:
         st.subheader("Reserve settings")
         st.write(
-            f"Reserve the train(s) automatically. You will need to reserve in the app/website within few minutes here: {LINKS[mode]['reserve_link']}"
+            f"Reserve the train(s) automatically. You will need to reserve in the app/website within few minutes [here]({LINKS[mode]['reserve_link']})"
         )
         st.write(
             "If you do not process the payment, the reservation will be cancelled automatically."
