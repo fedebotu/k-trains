@@ -1,7 +1,7 @@
 <center>
 
 # K-Trains 🇰🇷-🚄
- [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_red.svg)](https://dppbench.streamlit.app/)[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)[![python_sup](https://img.shields.io/badge/python-3.7+-blue.svg?)](https://www.python.org/downloads/release/python-370/)
+ [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_red.svg)](https://k-trains.streamlit.app)[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)[![python_sup](https://img.shields.io/badge/python-3.7+-blue.svg?)](https://www.python.org/downloads/release/python-370/)
 
  </center>
 
@@ -20,7 +20,7 @@ K-Trains is a Streamlit app that allows you to connect to [Korail](https://www.l
 ## How to use
 
 ### Web UI
-You can launch the app on Streamlit [here](https://dppbench.streamlit.app/). The UI should be self-explanatory - you can simply login and pick up some trains that you would like to get notifications for or reserve them directly. If they are not available, the app will notify you when they are and reserve them for you! 
+You can launch the app on Streamlit [here](https://k-trains.streamlit.app/). The UI should be self-explanatory - you can simply login and pick up some trains that you would like to get notifications for or reserve them directly. If they are not available, the app will notify you when they are and reserve them for you! 
 
 _Note that you still have to pay for the ticket in the Korail or SRT website/app within the time limit_.
 
