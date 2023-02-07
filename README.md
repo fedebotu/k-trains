@@ -1,22 +1,20 @@
 <div align="center">
 
 # K-Trains 🇰🇷-🚄
+
+
  [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_red.svg)](https://k-trains.streamlit.app)[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)[![python_sup](https://img.shields.io/badge/python-3.7+-blue.svg?)](https://www.python.org/downloads/release/python-370/)
 
+<br>
+<center>
+<img src="assets/ktrains.png" alt="K-Trains" width="300"/>
+</center>
+<br>
+<br>
  </div>
 
 
 _Tired of not having any ticket to Suseo station because your SRT is fully booked? How about that cheap Mugunghwa ticket that you can't get because it's sold out? K-Trains is here to help you get those tickets!_
-
-<div align="center">
-
-<br>
-<center>
-<img src="assets/ktrains.png" alt="K-Trains" width="400"/>
-</center>
-<br>
-
- </div>
 
 
 K-Trains is a Streamlit app that allows you to connect to [Korail](https://www.letskorail.com/) and [SRT](https://etk.srail.kr/)'s APIs to get information and reserve trains in Korea.
