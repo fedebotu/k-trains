@@ -689,7 +689,7 @@ class Korail(object):
             except NoResultsError:
                 break
 
-        if not available_only:
+        if available_only:
             all_trains = list(filter(lambda x: x.seat_available(), all_trains))
 
         if len(all_trains) == 0:
@@ -851,7 +851,7 @@ class Korail(object):
             for info in train_infos:
                 trains.append(Train(info))
 
-            if not available_only:
+            if available_only:
                 trains = list(filter(lambda x: x.seat_available(), trains))
 
             if len(trains) == 0:
