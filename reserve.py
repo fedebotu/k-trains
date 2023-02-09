@@ -13,10 +13,8 @@ from ktrains.manage import (
     manage_unavailable,
     manage_reservation,
     manage_error,
-    manage_start
+    manage_start,
 )
-
-
 
 
 def get_trains(
@@ -59,7 +57,6 @@ def get_trains(
         email_password (str, optional): email password. Defaults to None.
     """
     try:
-        
         print("Running main script!")
 
         if isinstance(notify, str):

@@ -67,5 +67,5 @@ def current_time_timezone(to_timezone="Asia/Seoul", format=True):
     target_timezone = pytz.timezone(to_timezone)
     target_time = current_time.astimezone(target_timezone)
     if format:
-        target_time = target_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+        target_time = target_time.strftime("%Y-%m-%d %H:%M:%S %Z%z")
     return target_time
