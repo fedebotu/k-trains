@@ -40,7 +40,9 @@ def manage_reservation(
     subject = "Reserved!"
     print(subject)
     message = f"Train<br>{train}<br>has been reserved! Complete the payment process on the app or website as soon as possible (in 10 or 20 minutes)."
-    message += f"<br><small>Time of reservation (KST): {current_time_timezone()}</small>"
+    message += (
+        f"<br><small>Time of reservation (KST): {current_time_timezone()}</small>"
+    )
 
     if notify:
         print("Sending reservation message")
@@ -54,7 +56,7 @@ def manage_reservation(
 
 def manage_start(
     trains, email_sender, email_receivers, email_password, notify=True, mode="korail"
-):  
+):
     # check if list
     if not isinstance(trains, list):
         trains = [trains]
