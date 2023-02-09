@@ -39,6 +39,10 @@ if "running" not in st.session_state:
     st.session_state.running = False
 if "previous_log" not in st.session_state:
     st.session_state.previous_log = ""
+if "cur_date" not in st.session_state:
+    st.session_state.cur_date = datetime.date.today()
+if "cur_time" not in st.session_state:
+    st.session_state.cur_time = datetime.datetime.now()
 
 
 def check_login():
@@ -52,7 +56,7 @@ def check_login():
 
 st.title("K-trains 🇰🇷-🚄")
 
-st.write("Fork me on [GitHub](https://github.com/fedebotu/k-trains)")
+st.write(f"Fork me on [GitHub]{LINKS['app']['github']}")
 
 if not check_login():
     # Login page
@@ -114,8 +118,10 @@ else:
     arr = stations.convert_station_name(arr)
 
     col1, col2 = st.columns(2)
-    date = col1.date_input("Date", value=datetime.date.today())
-    time = col2.time_input("Time", value=datetime.datetime.now())
+    date = col1.date_input("Date", value=st.session_state.cur_date)
+    time = col2.time_input("Time", value=st.session_state.cur_time)
+    st.session_state.cur_date = date
+    st.session_state.cur_time = time
     date = date.strftime("%Y%m%d")
     time = time.strftime("%H%M%S")
 
@@ -251,7 +257,7 @@ if st.session_state.trains is not None:
             "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
         )
         st.write(
-            "Note: sender email is k-trains@gmail.com. Be sure to check your spam folder."
+            f"Note: sender email is {LINKS['app']['email']}. Be sure to check your spam folder."
         )
         email_receivers = st.text_input("Receivers", st.session_state.email_receivers)
         st.session_state.email_receivers = email_receivers
