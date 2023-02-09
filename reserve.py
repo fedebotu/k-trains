@@ -1,62 +1,22 @@
-import argparse
-import time as python_time
-from typing import List
 import traceback
 import chime
 import streamlit as st
+from typing import List
+import time as python_time
+import argparse
 
 from ktrains.korail.korail import Korail
-from ktrains.notify import email_notify, create_email
 from ktrains.srt.srt import SRT
 from ktrains.utils import save_to_log
+from ktrains.manage import (
+    manage_available,
+    manage_unavailable,
+    manage_reservation,
+    manage_error,
+    manage_start
+)
 
 
-def manage_available(train, email_sender, email_receivers, email_password, notify=True):
-    subject = "Available!"
-    print(subject)
-    message = f"Train\n{train}\nhas seats now!"
-    message += f"\nCurrent time: {python_time.strftime('%Y-%m-%d %H:%M:%S', python_time.localtime())}"
-    if notify:
-        html = create_email(subject, message, reserve=False)
-        email_notify(
-            email_sender, email_receivers, subject, html, sender_pass=email_password
-        )
-    save_to_log(message)
-    chime.info()
-
-
-def manage_unavailable(
-    train, email_sender, email_receivers, email_password, notify=True
-):
-    subject = "Sold out"
-    print(subject)
-    message = f"Train\n{train}\nhas no more seats now."
-    message += f"\nCurrent time: {python_time.strftime('%Y-%m-%d %H:%M:%S', python_time.localtime())}"
-    if notify:
-        html = create_email(subject, message, reserve=False)
-        email_notify(
-            email_sender, email_receivers, subject, html, sender_pass=email_password
-        )
-    save_to_log(message)
-    chime.warning()
-
-
-def manage_reservation(
-    train, email_sender, email_receivers, email_password, notify=True, mode="korail"
-):
-    subject = "Reserved!"
-    print(subject)
-    message = f"Train\n{train}\nhas been reserved! Complete the payment process on the app or website."
-    message += f"\nCurrent time: {python_time.strftime('%Y-%m-%d %H:%M:%S', python_time.localtime())}"
-
-    if notify:
-        print("Sending reservation message")
-        html = create_email(subject, message, reserve=True, mode=mode)
-        email_notify(
-            email_sender, email_receivers, subject, html, sender_pass=email_password
-        )
-    save_to_log(message)
-    chime.success()
 
 
 def get_trains(
@@ -99,6 +59,7 @@ def get_trains(
         email_password (str, optional): email password. Defaults to None.
     """
     try:
+        
         print("Running main script!")
 
         if isinstance(notify, str):
@@ -126,12 +87,20 @@ def get_trains(
 
         tickets_reserved = 0
         total_tries = 0
+        started = False
 
         while True:
             trains = ktrains.search_train(dep, arr, date, time, available_only=False)
 
             # Filter out trains that are not in train_codes
             trains = [train for train in trains if train.train_number in train_nos]
+
+            if not started:
+                manage_start(
+                    trains, email_sender, email_receivers, email_password, notify, mode
+                )
+                started = True
+
             for train in trains:
                 was_available = train_availability[train.train_number]
 
@@ -175,6 +144,7 @@ def get_trains(
     except Exception:
         e = traceback.format_exc()
         print("Error:\n" + str(e))
+        manage_error(e, email_sender, email_receivers, email_password, notify)
         save_to_log("Error:\n" + str(e))
         chime.error()
 

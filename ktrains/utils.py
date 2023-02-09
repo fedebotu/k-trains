@@ -1,3 +1,6 @@
+import datetime
+import pytz
+
 from ktrains.korail.utils import convert_station_name as korail_convert_station_name
 from ktrains.korail.utils import station_names as korail_station_names
 from ktrains.srt.utils import convert_station_name as srt_convert_station_name
@@ -16,6 +19,11 @@ LINKS = {
         "link": "https://etk.srail.kr",
         "login_link": "https://etk.srail.kr/cmc/01/selectLoginForm.do?pageId=TK0701000000",
         "reserve_link": "https://etk.srail.kr/hpg/hra/02/selectReservationList.do?pageId=TK0102010000",
+    },
+    "app": {
+        "github": "https://github.com/fedebotu/k-trains",
+        "streamlit": "http://k-trains.streamlit.app/",
+        "email": "ktrains.app@gmail.com",
     },
 }
 
@@ -51,3 +59,13 @@ class Stations:
             raise ValueError(
                 f"Invalid mode: {self.mode}. Must be one of korail or srt."
             )
+
+
+def current_time_timezone(to_timezone="Asia/Seoul", format=True):
+    current_timezone = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinfo
+    current_time = datetime.datetime.now(current_timezone)
+    target_timezone = pytz.timezone(to_timezone)
+    target_time = current_time.astimezone(target_timezone)
+    if format:
+        target_time = target_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+    return target_time
