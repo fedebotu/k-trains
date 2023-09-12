@@ -46,6 +46,12 @@ You can also run the script to book a ticket directly:
 python reserve.py [OPTIONS]
 ```
 
+### Secrets and email API connection
+The app connects to a email account API (specifically, Google), which is private. If you want to deploy the app by yourself, you may encounter the following:
+```bash
+FileNotFoundError: No secrets files found. Valid paths for a secrets.toml file are: C:\Users\nyancat.streamlit\secrets.toml,
+```
+You may follow [this guide](https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app/secrets-management) for managing your own `secrets.toml` file. Moreover, if you do not use Gmail, you should modify the `email_notify` function, particularly at [this line](https://github.com/fedebotu/k-trains/blob/1a1f609600f870f09e3ef8fe4e692cc082fdb3cc/ktrains/notify.py#L49C1-L50C1).
 
 
 ## Acknowledgements
