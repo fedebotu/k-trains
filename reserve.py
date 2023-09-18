@@ -104,19 +104,21 @@ def get_trains(
             for train in trains:
                 was_available = train_availability[train.train_number]
                 seat = None
-                ReserveOption = ReserveOptionKorail if mode == "korail" else ReserveOptionSRT
-                if seat_type=="R" and train.general_seat_available() :
+                ReserveOption = (
+                    ReserveOptionKorail if mode == "korail" else ReserveOptionSRT
+                )
+                if seat_type == "R" and train.general_seat_available():
                     seat = ReserveOption.GENERAL_ONLY
-                elif seat_type=="S" and train.special_seat_available():
+                elif seat_type == "S" and train.special_seat_available():
                     seat = ReserveOption.SPECIAL_ONLY
-                elif seat_type=="B" and train.seat_available():
+                elif seat_type == "B" and train.seat_available():
                     seat = ReserveOption.GENERAL_FIRST
                 else:
                     seat = None
-                if not was_available and seat!=None:
+                if not was_available and seat != None:
                     if reserve:
                         if mode == "korail":
-                            ktrains.reserve(train,option=seat)
+                            ktrains.reserve(train, option=seat)
                         elif mode == "srt":
                             ktrains.reserve(train, special_seat=seat)
                         manage_reservation(
