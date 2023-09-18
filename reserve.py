@@ -5,7 +5,9 @@ from typing import List
 import time as python_time
 import argparse
 
-from ktrains.korail.korail import Korail
+from ktrains.korail.korail import AdultPassenger, Korail
+from ktrains.korail.korail import ReserveOption as ReserveOptionKorail
+from ktrains.srt.seat_type import SeatType as ReserveOptionSRT
 from ktrains.srt.srt import SRT
 from ktrains.utils import save_to_log
 from ktrains.manage import (
@@ -34,6 +36,7 @@ def get_trains(
     timeout: int = 5,
     email_sender: str = None,
     email_password: str = None,
+    seat_type: str = "B",
 ):
     """
     Main function to run the script. This function will run forever until the number of tickets is reserved or the number of tries is reached.
@@ -100,10 +103,22 @@ def get_trains(
 
             for train in trains:
                 was_available = train_availability[train.train_number]
-
-                if not was_available and train.seat_available():
+                seat = None
+                ReserveOption = ReserveOptionKorail if mode == "korail" else ReserveOptionSRT
+                if seat_type=="R" and train.general_seat_available() :
+                    seat = ReserveOption.GENERAL_ONLY
+                elif seat_type=="S" and train.special_seat_available():
+                    seat = ReserveOption.SPECIAL_ONLY
+                elif seat_type=="B" and train.seat_available():
+                    seat = ReserveOption.GENERAL_FIRST
+                else:
+                    seat = None
+                if not was_available and seat!=None:
                     if reserve:
-                        ktrains.reserve(train)
+                        if mode == "korail":
+                            ktrains.reserve(train,option=seat)
+                        elif mode == "srt":
+                            ktrains.reserve(train, special_seat=seat)
                         manage_reservation(
                             train,
                             email_sender,
@@ -164,6 +179,7 @@ if __name__ == "__main__":
     parser.add_argument("--timeout", type=int, default=5)
     parser.add_argument("--email-sender", type=str, default=None)
     parser.add_argument("--email-password", type=str, default=None)
+    parser.add_argument("--seat-type", type=str, default="B")
     args = parser.parse_args()
 
     print(args)

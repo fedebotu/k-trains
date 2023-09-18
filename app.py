@@ -250,6 +250,21 @@ if st.session_state.trains is not None:
             step=1,
             key="num_tickets",
         )
+
+        st.write(
+            "Select the prefered seat type. If both are selected, the app will try to reserve the first available."
+        )
+        sub_col1, sub_col2 = st.columns(2)
+        with sub_col1:
+            general_seat = st.checkbox("General seat", key="general_seat", value=True)
+        with sub_col2:
+            special_seat = st.checkbox("Special seat", key="special_seat", value=True)
+        if general_seat and not special_seat:
+            seat_type = "R"
+        elif not general_seat and special_seat:
+            seat_type = "S"
+        else:
+            seat_type = "B"
     with col2:
         st.subheader("Email notifications settings")
         st.write("Notify you when the train is available.")
@@ -263,8 +278,12 @@ if st.session_state.trains is not None:
         st.session_state.email_receivers = email_receivers
 
     col1, col2 = st.columns(2)
-    col1.checkbox("Reserve", key="reserve", value=True)
-    col2.checkbox("Notify", key="notify", value=True)
+    with col1:
+        st.write("Check to reserve the ticket.")
+        st.checkbox("Reserve", key="reserve", value=True)
+    with col2:
+        st.write("Check to Notify to email.")
+        st.checkbox("Notify", key="notify", value=True)
 
     st.markdown("---")
 
@@ -304,6 +323,8 @@ if st.session_state.trains is not None:
                 str(st.session_state.reserve),
                 "--number-of-tickets",
                 str(st.session_state.num_tickets),
+                "--seat-type",
+                seat_type,
             ]
             print(" ".join(command))
             pid = subprocess.Popen(command)  # open in background
