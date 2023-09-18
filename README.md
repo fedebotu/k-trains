@@ -19,8 +19,6 @@ _Tired of not having any ticket to Suseo station because your SRT is fully booke
 
 K-Trains is a Streamlit app that allows you to connect to [Korail](https://www.letskorail.com/) and [SRT](https://etk.srail.kr/)'s APIs to get information and reserve trains in Korea.
 
-
-
 ## How to use
 
 ### Web UI
@@ -53,6 +51,16 @@ FileNotFoundError: No secrets files found. Valid paths for a secrets.toml file a
 ```
 You may follow [this guide](https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app/secrets-management) for managing your own `secrets.toml` file. Moreover, if you do not use Gmail, you should modify the `email_notify` function, particularly at [this line](https://github.com/fedebotu/k-trains/blob/1a1f609600f870f09e3ef8fe4e692cc082fdb3cc/ktrains/notify.py#L49C1-L50C1).
 
+## Screenshots
+
+<div align="center">
+<br>
+<center>
+<img src="https://github.com/fedebotu/k-trains/assets/48984123/556b58aa-2e52-4e49-b30f-04530cb597b3" alt="k-train-email"/>
+</center>
+<br>
+ </div>
+ 
 
 ## Acknowledgements
 
