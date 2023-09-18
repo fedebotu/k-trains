@@ -56,7 +56,7 @@ You may follow [this guide](https://docs.streamlit.io/streamlit-community-cloud/
 <div align="center">
 <br>
 <center>
-<img src="https://github.com/fedebotu/k-trains/assets/48984123/556b58aa-2e52-4e49-b30f-04530cb597b3" alt="k-train-email"/>
+<img src="https://github.com/fedebotu/k-trains/assets/48984123/55ec2078-1034-4e95-b5e2-d15de8478107" alt="k-train-email"/>
 </center>
 <br>
  </div>
