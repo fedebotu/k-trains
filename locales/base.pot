@@ -1,0 +1,229 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-19 15:41+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: app.py:16
+msgid "Select your language"
+msgstr ""
+
+#: app.py:75
+msgid "Fork me on:"
+msgstr ""
+
+#: app.py:75
+msgid "GitHub"
+msgstr ""
+
+#: app.py:80
+msgid "Korail"
+msgstr ""
+
+#: app.py:80
+msgid "SRT"
+msgstr ""
+
+#: app.py:80
+msgid "Select railways company"
+msgstr ""
+
+#: app.py:82
+msgid "Get your credentials from {} website: [{}]({})"
+msgstr ""
+
+#: app.py:88
+msgid "ID"
+msgstr ""
+
+#: app.py:89
+msgid "PW"
+msgstr ""
+
+#: app.py:90
+msgid "Login"
+msgstr ""
+
+#: app.py:99
+msgid "Login failed"
+msgstr ""
+
+#: app.py:111
+msgid "Logged in successfully to {}"
+msgstr ""
+
+#: app.py:114
+msgid "Logged in as: {}"
+msgstr ""
+
+#: app.py:116
+msgid "Logout"
+msgstr ""
+
+#: app.py:130
+msgid "Departure"
+msgstr ""
+
+#: app.py:133
+msgid "Arrival"
+msgstr ""
+
+#: app.py:147
+msgid "Search"
+msgstr ""
+
+#: app.py:215
+msgid "No"
+msgstr ""
+
+#: app.py:216
+msgid "Type"
+msgstr ""
+
+#: app.py:217
+msgid "Schedule"
+msgstr ""
+
+#: app.py:218
+msgid "Time"
+msgstr ""
+
+#: app.py:219
+msgid "Duration"
+msgstr ""
+
+#: app.py:220
+msgid "Normal/Special Seat"
+msgstr ""
+
+#: app.py:221
+msgid "Price"
+msgstr ""
+
+#: app.py:233
+msgid "Search results for {}:"
+msgstr ""
+
+#: app.py:255
+msgid "Runner Settings"
+msgstr ""
+
+#: app.py:256
+msgid "The app will automatically reserve and/or notify you when the train is available."
+msgstr ""
+
+#: app.py:262
+msgid "Reserve settings"
+msgstr ""
+
+#: app.py:263
+msgid "Reserve the train(s) automatically. You will need to reserve in the app/website within a few minutes."
+msgstr ""
+
+#: app.py:267
+msgid "If you do not process the payment, the reservation will be cancelled automatically."
+msgstr ""
+
+#: app.py:271
+msgid "Number of tickets"
+msgstr ""
+
+#: app.py:279
+msgid "Please select the prefered seat type. If both are selected, the app will try to reserve the first available."
+msgstr ""
+
+#: app.py:282
+msgid "General seat"
+msgstr ""
+
+#: app.py:284
+msgid "Special seat"
+msgstr ""
+
+#: app.py:292
+msgid "Email notifications settings"
+msgstr ""
+
+#: app.py:293
+msgid "Notify you when the train is available."
+msgstr ""
+
+#: app.py:294
+msgid "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
+msgstr ""
+
+#: app.py:297
+msgid "Note: sender email is "
+msgstr ""
+
+#: app.py:298
+msgid " Be sure to check your spam folder."
+msgstr ""
+
+#: app.py:300
+msgid "Receivers"
+msgstr ""
+
+#: app.py:305
+msgid "Check to reserve the ticket."
+msgstr ""
+
+#: app.py:306
+msgid "Reserve"
+msgstr ""
+
+#: app.py:308
+msgid "Check to Notify to email."
+msgstr ""
+
+#: app.py:309
+msgid "Notify"
+msgstr ""
+
+#: app.py:313
+msgid "Submit"
+msgstr ""
+
+#: app.py:315
+msgid "Please set receiver(s) email in the sidebar"
+msgstr ""
+
+#: app.py:317
+msgid "Please select at least one train"
+msgstr ""
+
+#: app.py:357
+msgid "Running..."
+msgstr ""
+
+#: app.py:361
+msgid "Hang tight, I'm running... This may take some time, until we find a train!"
+msgstr ""
+
+#: app.py:365
+msgid "Log:"
+msgstr ""
+
+#: app.py:374
+msgid "Stop runner"
+msgstr ""
+
+#: app.py:377
+msgid "Stopped"
+msgstr ""
+
+#: app.py:380
+msgid "No process running"
+msgstr ""
+
