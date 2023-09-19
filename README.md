@@ -13,6 +13,8 @@
 <br>
  </div>
 
+> 한국어 버전 [클릭](README-KR.md)
+
 
 _Tired of not having any ticket to Suseo station because your SRT is fully booked? How about that cheap Mugunghwa ticket that you can't get because it's sold out? K-Trains is here to help you get those tickets!_
 
@@ -50,6 +52,9 @@ The app connects to a email account API (specifically, Google), which is private
 FileNotFoundError: No secrets files found. Valid paths for a secrets.toml file are: C:\Users\nyancat.streamlit\secrets.toml,
 ```
 You may follow [this guide](https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app/secrets-management) for managing your own `secrets.toml` file. Moreover, if you do not use Gmail, you should modify the `email_notify` function, particularly at [this line](https://github.com/fedebotu/k-trains/blob/1a1f609600f870f09e3ef8fe4e692cc082fdb3cc/ktrains/notify.py#L49C1-L50C1).
+
+## Disclaimer 
+Developers are not responsible for any misuse of this application. This application is for educational purposes only. Please use it at your own risk!
 
 ## Screenshots
 
