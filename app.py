@@ -3,6 +3,7 @@ import subprocess
 import sys
 from copy import deepcopy
 import gettext
+
 _ = gettext.gettext
 import pandas as pd
 import streamlit as st
@@ -13,20 +14,22 @@ from ktrains.korail.korail import Korail
 from ktrains.srt.srt import SRT
 from ktrains.utils import Stations, save_to_log, LINKS
 
-language = st.sidebar.selectbox(_('Select your language'), ['English', '한국어', 'Italiano','Español'])
-if language == 'English':
-    language = 'en'
-elif language == '한국어':
-    language = 'kr'
-elif language == 'Español':
-    language = 'es'
-elif language == 'Italiano':
-    language = 'it'
-    
+language = st.sidebar.selectbox(
+    _("Select your language"), ["English", "한국어", "Italiano", "Español"]
+)
+if language == "English":
+    language = "en"
+elif language == "한국어":
+    language = "kr"
+elif language == "Español":
+    language = "es"
+elif language == "Italiano":
+    language = "it"
+
 try:
-  localizator = gettext.translation('base', localedir='locales', languages=[language])
-  localizator.install()
-  _ = localizator.gettext 
+    localizator = gettext.translation("base", localedir="locales", languages=[language])
+    localizator.install()
+    _ = localizator.gettext
 except:
     pass
 
@@ -71,6 +74,7 @@ def check_login():
             return True
     return False
 
+
 st.title("K-trains 🇰🇷-🚄")
 st.markdown(_("Fork me on:") + f" [{_('GitHub')}]({LINKS['app']['github']})")
 
@@ -79,8 +83,8 @@ if not check_login():
     # Checkbox with two options and an image on top of each
     mode = st.selectbox(_("Select railways company"), [_("Korail"), _("SRT")]).lower()
     st.session_state.mode = mode.lower()
-    st.write(_(
-        "Get your credentials from {} website: [{}]({})").format(
+    st.write(
+        _("Get your credentials from {} website: [{}]({})").format(
             LINKS[mode]["name"], LINKS[mode]["link"], LINKS[mode]["link"]
         )
     )
@@ -98,10 +102,10 @@ if not check_login():
         else:
             st.error(_("Login failed"))
 else:
-    if language == 'kr':
-        language_sched = 'kor'
+    if language == "kr":
+        language_sched = "kor"
     else:
-        language_sched = 'en'
+        language_sched = "en"
 
     # What happens when logged in
     mode = st.session_state.mode
@@ -143,26 +147,32 @@ else:
     date = date.strftime("%Y%m%d")
     time = time.strftime("%H%M%S")
 
-    table_stations = Stations(mode,language_sched)
+    table_stations = Stations(mode, language_sched)
     if st.button(_("Search")):
         trains = ktrains.search_train(dep, arr, date, time, available_only=False)
         if trains == []:
             st.error("No trains found")
             st.session_state.trains = None
         else:
-            #stations.convert_station_name(trains[0].dep_station_name, lang="en")
+            # stations.convert_station_name(trains[0].dep_station_name, lang="en")
             train_list = []
             for train in trains:
-                if language != 'kr':
+                if language != "kr":
                     table_lang = "tc"
                 else:
                     table_lang = "kr"
                 train_list.append(
                     {
                         "train_no": train.train_number,
-                        "train_type_name": stations.convert_train_name(train.train_name,lang=table_lang),
-                        "dep_name": stations.convert_station_name(train.dep_station_name,lang=table_lang),
-                        "arr_name": stations.convert_station_name(train.arr_station_name,lang=table_lang),
+                        "train_type_name": stations.convert_train_name(
+                            train.train_name, lang=table_lang
+                        ),
+                        "dep_name": stations.convert_station_name(
+                            train.dep_station_name, lang=table_lang
+                        ),
+                        "arr_name": stations.convert_station_name(
+                            train.arr_station_name, lang=table_lang
+                        ),
                         "dep_time": train.dep_time,
                         "arr_time": train.arr_time,
                         "duration": None,
@@ -242,7 +252,7 @@ if st.session_state.trains is not None:
         header_checkbox_selection_filtered_only=True,
         theme="streamlit",
         use_checkbox=True,
-        width="200%"
+        width="200%",
     )
 
     new_df = pd.DataFrame(grid_return["selected_rows"])
@@ -253,20 +263,27 @@ if st.session_state.trains is not None:
         # st.write(train_codes)
 
     st.header(_("Runner Settings"))
-    st.write(_(
-        "The app will automatically reserve and/or notify you when the train is available."
-    ))
+    st.write(
+        _(
+            "The app will automatically reserve and/or notify you when the train is available."
+        )
+    )
 
     col1, col2 = st.columns(2)
     with col1:
         st.subheader(_("Reserve settings"))
-        st.markdown(_(
-            "Reserve the train(s) automatically. You will need to reserve in the app/website within a few minutes.")+ f" ([link]({LINKS[mode]['reserve_link']}))"
-    )
+        st.markdown(
+            _(
+                "Reserve the train(s) automatically. You will need to reserve in the app/website within a few minutes."
+            )
+            + f" ([link]({LINKS[mode]['reserve_link']}))"
+        )
 
-        st.write(_(
-            "If you do not process the payment, the reservation will be cancelled automatically."
-        ))  
+        st.write(
+            _(
+                "If you do not process the payment, the reservation will be cancelled automatically."
+            )
+        )
         st.number_input(
             _("Number of tickets"),
             min_value=1,
@@ -276,12 +293,20 @@ if st.session_state.trains is not None:
             key="num_tickets",
         )
 
-        st.write(_("Please select the preferred seat type. If both are selected, the app will try to reserve the first available."))
+        st.write(
+            _(
+                "Please select the preferred seat type. If both are selected, the app will try to reserve the first available."
+            )
+        )
         sub_col1, sub_col2 = st.columns(2)
         with sub_col1:
-            general_seat = st.checkbox(_("General seat"), key="general_seat", value=True)
+            general_seat = st.checkbox(
+                _("General seat"), key="general_seat", value=True
+            )
         with sub_col2:
-            special_seat = st.checkbox(_("Special seat"), key="special_seat", value=True)
+            special_seat = st.checkbox(
+                _("Special seat"), key="special_seat", value=True
+            )
         if general_seat and not special_seat:
             seat_type = "R"
         elif not general_seat and special_seat:
@@ -291,13 +316,19 @@ if st.session_state.trains is not None:
     with col2:
         st.subheader(_("Email notifications settings"))
         st.write(_("Notify you when the train is available."))
-        st.write(_(
-            "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
-        ))
-        st.write(_(
-            "Note: sender email is ")+f" {LINKS['app']['email']} ."+_(" Be sure to check your spam folder."
-        ))
-        email_receivers = st.text_input(_("Receivers"), st.session_state.email_receivers)
+        st.write(
+            _(
+                "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
+            )
+        )
+        st.write(
+            _("Note: sender email is ")
+            + f" {LINKS['app']['email']} ."
+            + _(" Be sure to check your spam folder.")
+        )
+        email_receivers = st.text_input(
+            _("Receivers"), st.session_state.email_receivers
+        )
         st.session_state.email_receivers = email_receivers
 
     col1, col2 = st.columns(2)
@@ -358,9 +389,9 @@ if st.session_state.trains is not None:
 
 # If running, show log
 if st.session_state.running:
-    st.write(_(
-        "Hang tight, I'm running... This may take some time, until we find a train!"
-    ))
+    st.write(
+        _("Hang tight, I'm running... This may take some time, until we find a train!")
+    )
     st.markdown("---")
     st.write(_("Log:"))
     with open("log.txt", "r") as f:

@@ -60,8 +60,8 @@ class Stations:
             raise ValueError(
                 f"Invalid mode: {self.mode}. Must be one of korail or srt."
             )
-        
-    def convert_train_name(self,train_name,lang=None):
+
+    def convert_train_name(self, train_name, lang=None):
         if lang is None:
             lang = self.lang
         if self.mode == "korail":
