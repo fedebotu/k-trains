@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-19 15:41+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: app.py:16
+msgid "Select your language"
+msgstr "언어 선택"
+
+#: app.py:75
+msgid "Fork me on:"
+msgstr "GitHub에서 포크하세요:"
+
+#: app.py:75
+msgid "GitHub"
+msgstr "GitHub"
+
+#: app.py:80
+msgid "Korail"
+msgstr "Korail"
+
+#: app.py:80
+msgid "SRT"
+msgstr "SRT"
+
+#: app.py:80
+msgid "Select railways company"
+msgstr "철도 회사 선택"
+
+#: app.py:82
+msgid "Get your credentials from {} website: [{}]({})"
+msgstr "{} 웹 사이트에서 자격 증명을 가져오세요: [{}]({})"
+
+#: app.py:88
+msgid "ID"
+msgstr "아이디"
+
+#: app.py:89
+msgid "PW"
+msgstr "비밀번호"
+
+#: app.py:90
+msgid "Login"
+msgstr "로그인"
+
+#: app.py:99
+msgid "Login failed"
+msgstr "로그인 실패"
+
+#: app.py:111
+msgid "Logged in successfully to {}"
+msgstr "{}(으)로 성공적으로 로그인되었습니다."
+
+#: app.py:114
+msgid "Logged in as: {}"
+msgstr "{}로 로그인되었습니다."
+
+#: app.py:116
+msgid "Logout"
+msgstr "로그아웃"
+
+#: app.py:130
+msgid "Departure"
+msgstr "출발"
+
+#: app.py:133
+msgid "Arrival"
+msgstr "도착"
+
+#: app.py:147
+msgid "Search"
+msgstr "검색"
+
+#: app.py:215
+msgid "No"
+msgstr "번호"
+
+#: app.py:216
+msgid "Type"
+msgstr "유형"
+
+#: app.py:217
+msgid "Schedule"
+msgstr "일정"
+
+#: app.py:218
+msgid "Time"
+msgstr "시간"
+
+#: app.py:219
+msgid "Duration"
+msgstr "소요 시간"
+
+#: app.py:220
+msgid "Normal/Special Seat"
+msgstr "일반/특별 좌석"
+
+#: app.py:221
+msgid "Price"
+msgstr "가격"
+
+#: app.py:233
+msgid "Search results for {}:"
+msgstr "{}에 대한 검색 결과:"
+
+#: app.py:255
+msgid "Runner Settings"
+msgstr "실행 설정"
+
+#: app.py:256
+msgid "The app will automatically reserve and/or notify you when the train is available."
+msgstr "앱은 열차가 사용 가능할 때 자동으로 예약하거나 알림을 보냅니다."
+
+#: app.py:262
+msgid "Reserve settings"
+msgstr "예약 설정"
+
+#: app.py:263
+msgid "Reserve the train(s) automatically. You will need to reserve in the app/website within a few minutes."
+msgstr "열차를 자동으로 예약합니다. 앱/웹 사이트에서 몇 분 안에 예약해야 합니다."
+
+#: app.py:267
+msgid "If you do not process the payment, the reservation will be cancelled automatically."
+msgstr "결제를 처리하지 않으면 예약이 자동으로 취소됩니다."
+
+#: app.py:271
+msgid "Number of tickets"
+msgstr "티켓 수"
+
+#: app.py:279
+msgid "Please select the preferred seat type. If both are selected, the app will try to reserve the first available."
+msgstr "원하는 좌석 유형을 선택하세요. 둘 다 선택한 경우, 앱은 첫 번째로 사용 가능한 좌석을 예약하려고 시도합니다."
+
+#: app.py:282
+msgid "General seat"
+msgstr "일반 좌석"
+
+#: app.py:284
+msgid "Special seat"
+msgstr "특별 좌석"
+
+#: app.py:292
+msgid "Email notifications settings"
+msgstr "이메일 알림 설정"
+
+#: app.py:293
+msgid "Notify you when the train is available."
+msgstr "열차가 사용 가능할 때 알림을 보냅니다."
+
+#: app.py:294
+msgid "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
+msgstr "받는 사람은 알림을 받을 이메일 주소입니다. 여러 주소를 구분할 때 쉼표를 사용하세요."
+
+#: app.py:297
+msgid "Note: sender email is "
+msgstr "참고: 발신자 이메일은"
+
+#: app.py:298
+msgid " Be sure to check your spam folder."
+msgstr "스팸 폴더를 확인하세요."
+
+#: app.py:300
+msgid "Receivers"
+msgstr "받는 사람"
+
+#: app.py:305
+msgid "Check to reserve the ticket."
+msgstr "티켓을 예약하려면 확인하세요."
+
+#: app.py:306
+msgid "Reserve"
+msgstr "예약"
+
+#: app.py:308
+msgid "Check to Notify to email."
+msgstr "이메일로 알림을 받으려면 확인하세요."
+
+#: app.py:309
+msgid "Notify"
+msgstr "알림"
+
+#: app.py:313
+msgid "Submit"
+msgstr "제출"
+
+#: app.py:315
+msgid "Please set receiver(s) email in the sidebar"
+msgstr "사이드바에서 수신자(들) 이메일을 설정하세요."
+
+#: app.py:317
+msgid "Please select at least one train"
+msgstr "최소한 하나의 열차를 선택하세요."
+
+#: app.py:357
+msgid "Running..."
+msgstr "실행 중..."
+
+#: app.py:361
+msgid "Hang tight, I'm running... This may take some time, until we find a train!"
+msgstr "기다려주세요, 실행 중입니다... 시간이 걸릴 수 있습니다. 열차를 찾을 때까지!"
+
+#: app.py:365
+msgid "Log:"
+msgstr "로그:"
+
+#: app.py:374
+msgid "Stop runner"
+msgstr "실행 중지"
+
+#: app.py:377
+msgid "Stopped"
+msgstr "중지됨"
+
+#: app.py:380
+msgid "No process running"
+msgstr "실행 중인 프로세스 없음"

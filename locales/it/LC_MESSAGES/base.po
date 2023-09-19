@@ -1,0 +1,227 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-09-19 15:41+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+#: app.py:16
+msgid "Select your language"
+msgstr "Seleziona la tua lingua"
+
+#: app.py:75
+msgid "Fork me on:"
+msgstr "Fork me on:"
+
+#: app.py:75
+msgid "GitHub"
+msgstr "GitHub"
+
+#: app.py:80
+msgid "Korail"
+msgstr "Korail"
+
+#: app.py:80
+msgid "SRT"
+msgstr "SRT"
+
+#: app.py:80
+msgid "Select railways company"
+msgstr "Seleziona la compagnia ferroviaria"
+
+#: app.py:82
+msgid "Get your credentials from {} website: [{}]({})"
+msgstr "Ottieni le tue credenziali dal sito web di {}:[{}]({})"
+
+#: app.py:88
+msgid "ID"
+msgstr "ID"
+
+#: app.py:89
+msgid "PW"
+msgstr "PW"
+
+#: app.py:90
+msgid "Login"
+msgstr "Accedi"
+
+#: app.py:99
+msgid "Login failed"
+msgstr "Accesso fallito"
+
+#: app.py:111
+msgid "Logged in successfully to {}"
+msgstr "Accesso effettuato con successo a {}"
+
+#: app.py:114
+msgid "Logged in as: {}"
+msgstr "Accesso effettuato come: {}"
+
+#: app.py:116
+msgid "Logout"
+msgstr "Esci"
+
+#: app.py:130
+msgid "Departure"
+msgstr "Partenza"
+
+#: app.py:133
+msgid "Arrival"
+msgstr "Arrivo"
+
+#: app.py:147
+msgid "Search"
+msgstr "Ricerca"
+
+#: app.py:215
+msgid "No"
+msgstr "No"
+
+#: app.py:216
+msgid "Type"
+msgstr "Tipo"
+
+#: app.py:217
+msgid "Schedule"
+msgstr "Orario"
+
+#: app.py:218
+msgid "Time"
+msgstr "Ora"
+
+#: app.py:219
+msgid "Duration"
+msgstr "Durata"
+
+#: app.py:220
+msgid "Normal/Special Seat"
+msgstr "Posto Normale/Speciale"
+
+#: app.py:221
+msgid "Price"
+msgstr "Prezzo"
+
+#: app.py:233
+msgid "Search results for {}:"
+msgstr "Risultati della ricerca per {}:" 
+
+#: app.py:255
+msgid "Runner Settings"
+msgstr "Impostazioni Esecutore"
+
+#: app.py:256
+msgid "The app will automatically reserve and/or notify you when the train is available."
+msgstr "L'applicazione effettuerà automaticamente la prenotazione e/o ti notificherà quando il treno sarà disponibile."
+
+#: app.py:262
+msgid "Reserve settings"
+msgstr "Impostazioni di Prenotazione"
+
+#: app.py:263
+msgid "Reserve the train(s) automatically. You will need to reserve in the app/website within a few minutes."
+msgstr "Prenota automaticamente il/i treno/i. Dovrai prenotare nell'app/sito web entro pochi minuti."
+
+#: app.py:267
+msgid "If you do not process the payment, the reservation will be cancelled automatically."
+msgstr "Se non procedi al pagamento, la prenotazione verrà cancellata automaticamente."
+
+#: app.py:271
+msgid "Number of tickets"
+msgstr "Numero di biglietti"
+
+#: app.py:279
+msgid "Please select the preferred seat type. If both are selected, the app will try to reserve the first available."
+msgstr "Seleziona il tipo di posto preferito. Se sono entrambi selezionati, l'app cercherà di prenotare il primo disponibile."
+
+#: app.py:282
+msgid "General seat"
+msgstr "Posto Generale"
+
+#: app.py:284
+msgid "Special seat"
+msgstr "Posto Speciale"
+
+#: app.py:292
+msgid "Email notifications settings"
+msgstr "Impostazioni di Notifica via Email"
+
+#: app.py:293
+msgid "Notify you when the train is available."
+msgstr "Ti notificherà quando il treno sarà disponibile."
+
+#: app.py:294
+msgid "Receivers are the email addresses that will receive notifications. Use commas to separate multiple addresses."
+msgstr "I destinatari sono gli indirizzi email che riceveranno le notifiche. Usa le virgole per separare gli indirizzi multipli."
+
+#: app.py:297
+msgid "Note: sender email is "
+msgstr "Nota: l'indirizzo email del mittente è"
+
+#: app.py:298
+msgid " Be sure to check your spam folder."
+msgstr "Assicurati di controllare la tua cartella spam."
+
+#: app.py:300
+msgid "Receivers"
+msgstr "Destinatari"
+
+#: app.py:305
+msgid "Check to reserve the ticket."
+msgstr "Spunta per prenotare il biglietto."
+
+#: app.py:306
+msgid "Reserve"
+msgstr "Prenota"
+
+#: app.py:308
+msgid "Check to Notify to email."
+msgstr "Spunta per Notificare via Email."
+
+#: app.py:309
+msgid "Notify"
+msgstr "Notifica"
+
+#: app.py:313
+msgid "Submit"
+msgstr "Invia"
+
+#: app.py:315
+msgid "Please set receiver(s) email in the sidebar"
+msgstr "Imposta il/i tuo/i indirizzo/i email nella barra laterale."
+
+#: app.py:317
+msgid "Please select at least one train"
+msgstr "Per favore, seleziona almeno un treno."
+
+#: app.py:357
+msgid "Running..."
+msgstr "In esecuzione..."
+
+#: app.py:361
+msgid "Hang tight, I'm running... This may take some time, until we find a train!"
+msgstr "Attendi, sto eseguendo... Ci potrebbe volere del tempo, fino a quando non troviamo un treno!"
+
+#: app.py:365
+msgid "Log:"
+msgstr "Registro:"
+
+#: app.py:374
+msgid "Stop runner"
+msgstr "Ferma l'esecutore"
+
+#: app.py:377
+msgid "Stopped"
+msgstr "Fermato"
+
+#: app.py:380
+msgid "No process running"
+msgstr "Nessun processo in esecuzione"

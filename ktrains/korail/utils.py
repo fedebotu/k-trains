@@ -532,16 +532,56 @@ station_names_english = [
     "Hwanggan",
     "Hoengseong",
     "Hoengcheon",
-    " Hyocheon",
+    "Hyocheon",
 ]
 
 station_names = {"kor": station_names_korean, "en": station_names_english}
-
 
 def convert_station_name(station_name, lang="en"):
     if lang == "en":
         # get index of station_name in station_names_english
         index = station_names_english.index(station_name)
         return station_names_korean[index]
+    elif lang == "tc":
+        index = station_names_korean.index(station_name)
+        return station_names_english[index]
     else:
         return station_name
+
+
+train_types_korean = [
+    "KTX",
+    "KTX-산천",
+    "ITX-청춘",
+    "ITX-마음",
+    "ITX-새마을",
+    "새마을",
+    "누리로",
+    "무궁화호",
+    "통근열차",
+]
+
+train_types_english = [
+    "KTX",
+    "KTX-Sancheon",
+    "ITX-Cheongchun",
+    "ITX-Maum",
+    "ITX-Saemaeul",
+    "Saemaeul",
+    "Nuriro",
+    "Mugunghwa",
+    "Commuter",
+]   
+
+train_types = {"kor": train_types_korean, "en": train_types_english}
+
+def convert_train_name(train_type, lang):
+    if lang == "en":
+        index = train_types_english.index(train_type)
+        return train_types_korean[index]
+    elif lang == "tc":
+        index = train_types_korean.index(train_type)
+        return train_types_english[index]
+    else:
+        return train_type
+    

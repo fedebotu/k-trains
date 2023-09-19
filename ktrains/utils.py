@@ -1,6 +1,7 @@
 import datetime
 import pytz
 
+from ktrains.korail.utils import convert_train_name as korail_convert_train_name
 from ktrains.korail.utils import convert_station_name as korail_convert_station_name
 from ktrains.korail.utils import station_names as korail_station_names
 from ktrains.srt.utils import convert_station_name as srt_convert_station_name
@@ -55,6 +56,18 @@ class Stations:
             return korail_convert_station_name(station_name, lang)
         elif self.mode == "srt":
             return srt_convert_station_name(station_name, lang)
+        else:
+            raise ValueError(
+                f"Invalid mode: {self.mode}. Must be one of korail or srt."
+            )
+        
+    def convert_train_name(self,train_name,lang=None):
+        if lang is None:
+            lang = self.lang
+        if self.mode == "korail":
+            return korail_convert_train_name(train_name, lang)
+        elif self.mode == "srt":
+            return train_name
         else:
             raise ValueError(
                 f"Invalid mode: {self.mode}. Must be one of korail or srt."
