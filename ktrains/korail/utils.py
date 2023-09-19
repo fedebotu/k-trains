@@ -537,6 +537,7 @@ station_names_english = [
 
 station_names = {"kor": station_names_korean, "en": station_names_english}
 
+
 def convert_station_name(station_name, lang="en"):
     if lang == "en":
         # get index of station_name in station_names_english
@@ -571,9 +572,10 @@ train_types_english = [
     "Nuriro",
     "Mugunghwa",
     "Commuter",
-]   
+]
 
 train_types = {"kor": train_types_korean, "en": train_types_english}
+
 
 def convert_train_name(train_type, lang):
     if lang == "en":
@@ -584,4 +586,3 @@ def convert_train_name(train_type, lang):
         return train_types_english[index]
     else:
         return train_type
-    
