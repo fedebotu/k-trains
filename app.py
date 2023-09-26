@@ -259,7 +259,7 @@ if st.session_state.trains is not None:
 
     # get train_codes from new df
     if not new_df.empty:
-        train_codes = new_df["No"].tolist()
+        train_codes = new_df.iloc[:,1].tolist()
         # st.write(train_codes)
 
     st.header(_("Runner Settings"))
