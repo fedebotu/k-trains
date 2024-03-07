@@ -21,8 +21,6 @@ _Tired of not having any ticket to Suseo station because your SRT is fully booke
 
 K-Trains is a Streamlit app that allows you to connect to [Korail](https://www.letskorail.com/) and [SRT](https://etk.srail.kr/)'s APIs to get information and reserve trains in Korea.
 
-> [!Important]
-> [Log in issues](https://github.com/fedebotu/k-trains/issues/13): Recently, the deployed Streamlit app has received quite a lot of traffic, and it seems that servers (that are provided for free) may block too many requests to/from Korail or SRT. If this happens, you can either [deploy your own fork on Streamlit](https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app) or [locally deploy](#manual-deployment) it.
 
 ## How to use
 
