@@ -556,6 +556,8 @@ class Korail(object):
     _version = "190617001"
     _key = "korail1234567890"
 
+    _idx = None
+
     membership_number = None
     name = None
     email = None
