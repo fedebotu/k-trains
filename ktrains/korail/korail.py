@@ -573,27 +573,26 @@ class Korail(object):
 
     def __enc_password(self, password):
         url = KORAIL_CODE
-        data = {
-            'code': "app.login.cphd"
-        }
+        data = {"code": "app.login.cphd"}
 
         r = self._session.post(url, data=data)
         j = json.loads(r.text)
 
-        if j['strResult'] == 'SUCC' and j.get('app.login.cphd') is not None:
-            self._idx = j['app.login.cphd']['idx']
-            key = j['app.login.cphd']['key']
+        if j["strResult"] == "SUCC" and j.get("app.login.cphd") is not None:
+            self._idx = j["app.login.cphd"]["idx"]
+            key = j["app.login.cphd"]["key"]
 
-            encrypt_key = key.encode(encoding='utf-8', errors='strict')
-            iv = key[:16].encode(encoding='utf-8', errors='strict')
+            encrypt_key = key.encode(encoding="utf-8", errors="strict")
+            iv = key[:16].encode(encoding="utf-8", errors="strict")
             cipher = AES.new(encrypt_key, AES.MODE_CBC, iv)
-            
+
             padded_data = pad(password.encode("utf-8"), AES.block_size)
 
-            return base64.b64encode(base64.b64encode(cipher.encrypt(padded_data))).decode("utf-8")
+            return base64.b64encode(
+                base64.b64encode(cipher.encrypt(padded_data))
+            ).decode("utf-8")
         else:
             return False
-        
 
     def login(self, korail_id=None, korail_pw=None):
         """Login to Korail server.
@@ -649,8 +648,8 @@ class Korail(object):
             # 5 : for email,
             "txtInputFlg": txt_input_flg,
             "txtMemberNo": korail_id,
-            'txtPwd': self.__enc_password(korail_pw),
-            'idx': self._idx
+            "txtPwd": self.__enc_password(korail_pw),
+            "idx": self._idx,
         }
 
         r = self._session.post(url, data=data)
