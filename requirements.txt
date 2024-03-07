@@ -4,3 +4,4 @@ pandas
 chime
 datetime
 pytz
+PyCryptodome
