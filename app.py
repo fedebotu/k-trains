@@ -98,7 +98,7 @@ if not check_login():
         st.session_state.ktrains = ktrains
         if check_login():
             # refresh page
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error(_("Login failed"))
 else:
@@ -121,7 +121,7 @@ else:
         if logout_button:
             st.session_state.ktrains.logout()
             st.session_state.ktrains = None
-            st.experimental_rerun()
+            st.rerun()
     # divider
     st.markdown("""---""")
 
