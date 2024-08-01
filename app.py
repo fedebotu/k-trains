@@ -90,7 +90,9 @@ if not check_login():
     )
     col1, col2 = st.columns(2)
     st.session_state.id = col1.text_input(_("ID"), st.session_state.id, key="username")
-    st.session_state.pw = col2.text_input(_("PW"), st.session_state.pw, type="password", key="password")
+    st.session_state.pw = col2.text_input(
+        _("PW"), st.session_state.pw, type="password", key="password"
+    )
     login_button = st.button(_("Login"))
     if login_button:
         KTrains = name_to_class[st.session_state.mode]
@@ -130,7 +132,7 @@ else:
 
     stations_names = stations.station_names()
     stations_names = list(map(str, stations_names))
-    if 'dep_index' not in st.session_state or 'arr_index' not in st.session_state:
+    if "dep_index" not in st.session_state or "arr_index" not in st.session_state:
         if mode == "korail":
             st.session_state.dep_index = 107
             st.session_state.arr_index = 44
@@ -142,11 +144,16 @@ else:
     swap_col.write(" ")
     if swap_col.button("⇄"):
         # Swap the values in session state
-        st.session_state.dep_index, st.session_state.arr_index = st.session_state.arr_index, st.session_state.dep_index
+        st.session_state.dep_index, st.session_state.arr_index = (
+            st.session_state.arr_index,
+            st.session_state.dep_index,
+        )
         dep = stations_names[st.session_state.dep_index]
         arr = stations_names[st.session_state.arr_index]
         # Use session state for indices
-    dep = col1.selectbox(_("Departure"), stations_names, index=st.session_state.dep_index)
+    dep = col1.selectbox(
+        _("Departure"), stations_names, index=st.session_state.dep_index
+    )
     arr = col2.selectbox(_("Arrival"), stations_names, index=st.session_state.arr_index)
 
     col1, col2 = st.columns(2)
@@ -163,11 +170,17 @@ else:
     # Convert the datetime object back to a string
     new_time_str = time_obj.strftime("%H%M%S")
     time = new_time_str
-    #time = "000000"
+    # time = "000000"
 
     table_stations = Stations(mode, language_sched)
     if st.button(_("Search")):
-        trains = ktrains.search_train(stations.convert_station_name(dep), stations.convert_station_name(arr), date, time, available_only=False)
+        trains = ktrains.search_train(
+            stations.convert_station_name(dep),
+            stations.convert_station_name(arr),
+            date,
+            time,
+            available_only=False,
+        )
         if trains == []:
             st.error("No trains found")
             st.session_state.trains = None
@@ -261,11 +274,11 @@ if st.session_state.trains is not None:
         st.write(_("Search results for {}:").format(date_formatted))
 
     # Split the dataframe into chunks for pagination
-    if 'current_chunk_index' not in st.session_state:
-        st.session_state['current_chunk_index'] = 0
+    if "current_chunk_index" not in st.session_state:
+        st.session_state["current_chunk_index"] = 0
 
-    if 'current_selected_time' not in st.session_state:
-        st.session_state['current_selected_time'] = "111111"
+    if "current_selected_time" not in st.session_state:
+        st.session_state["current_selected_time"] = "111111"
 
     # Check if DataFrame is not empty
     flag_time = time_selected
@@ -273,21 +286,21 @@ if st.session_state.trains is not None:
         chunk_size = 10  # Default chunk size
         if len(df) < chunk_size:
             chunk_size = len(df)
-        chunks = [df[i:i + chunk_size] for i in range(0, len(df), chunk_size)]
+        chunks = [df[i : i + chunk_size] for i in range(0, len(df), chunk_size)]
         total_chunks = len(chunks)
 
-        #Time changed
-        if st.session_state['current_selected_time'] != time_selected:
-            st.session_state['current_selected_time'] = time_selected
+        # Time changed
+        if st.session_state["current_selected_time"] != time_selected:
+            st.session_state["current_selected_time"] = time_selected
             for i, chunk in enumerate(chunks):
-                times_chunks = chunk['Time'].str[:2]
+                times_chunks = chunk["Time"].str[:2]
                 if time_selected[:2] in times_chunks.tolist():
-                    st.session_state['current_chunk_index'] = i
+                    st.session_state["current_chunk_index"] = i
                     break
-        
+
         # Assuming grid_options is defined and AgGrid is imported
         grid_return = AgGrid(
-            chunks[st.session_state['current_chunk_index']],
+            chunks[st.session_state["current_chunk_index"]],
             gridOptions=grid_options,
             fit_columns_on_grid_load=False,
             allow_unsafe_jscode=True,
@@ -298,22 +311,23 @@ if st.session_state.trains is not None:
             use_checkbox=True,
             width="200%",
         )
-        
+
         # Navigation Buttons
         kol2, kol1, kol3 = st.columns([0.7, 1, 1])
-        
+
         # Previous Button
         with kol1:
-            if st.session_state['current_chunk_index'] > 0 and st.button("<- Previous"):
-                st.session_state['current_chunk_index'] -= 1
-                st.experimental_rerun()
-        
-        # Next Button
-        with kol3:
-            if st.session_state['current_chunk_index'] < total_chunks - 1 and st.button("Next ->"):
-                st.session_state['current_chunk_index'] += 1
+            if st.session_state["current_chunk_index"] > 0 and st.button("<- Previous"):
+                st.session_state["current_chunk_index"] -= 1
                 st.experimental_rerun()
 
+        # Next Button
+        with kol3:
+            if st.session_state["current_chunk_index"] < total_chunks - 1 and st.button(
+                "Next ->"
+            ):
+                st.session_state["current_chunk_index"] += 1
+                st.experimental_rerun()
 
     new_df = pd.DataFrame(grid_return["selected_rows"])
 
