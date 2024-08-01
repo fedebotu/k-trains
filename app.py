@@ -151,13 +151,19 @@ else:
 
     col1, col2 = st.columns(2)
     date = col1.date_input("Date", value=st.session_state.cur_date)
-    time = col2.time_input("Time", value=st.session_state.cur_time)
+    time = col2.time_input("Time", value=st.session_state.cur_time, step=3600)
     st.session_state.cur_date = date
     st.session_state.cur_time = time
     date = date.strftime("%Y%m%d")
     time_selected = time.strftime("%H%M%S")
-    #time = time.strftime("%H%M%S")
-    time = "000000"
+    time = time.strftime("%H%M%S")
+    time_obj = datetime.datetime.strptime(time, "%H%M%S")
+    # Subtract one hour
+    time_obj -= datetime.timedelta(hours=1)
+    # Convert the datetime object back to a string
+    new_time_str = time_obj.strftime("%H%M%S")
+    time = new_time_str
+    #time = "000000"
 
     table_stations = Stations(mode, language_sched)
     if st.button(_("Search")):
